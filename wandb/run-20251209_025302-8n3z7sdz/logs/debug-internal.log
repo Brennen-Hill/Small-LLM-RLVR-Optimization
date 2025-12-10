@@ -1,0 +1,15 @@
+{"time":"2025-12-09T02:53:02.74333015-06:00","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-09T02:53:02.981625235-06:00","level":"INFO","msg":"stream: created new stream","id":"8n3z7sdz"}
+{"time":"2025-12-09T02:53:02.982189788-06:00","level":"INFO","msg":"handler: started","stream_id":"8n3z7sdz"}
+{"time":"2025-12-09T02:53:02.982277863-06:00","level":"INFO","msg":"stream: started","id":"8n3z7sdz"}
+{"time":"2025-12-09T02:53:02.982284566-06:00","level":"INFO","msg":"writer: started","stream_id":"8n3z7sdz"}
+{"time":"2025-12-09T02:53:02.982312469-06:00","level":"INFO","msg":"sender: started","stream_id":"8n3z7sdz"}
+{"time":"2025-12-09T02:53:03.01988774-06:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2025-12-09T02:53:03.019938536-06:00","level":"ERROR","msg":"runupserter: failed to init run","error":"returned error 404: {\"data\":{\"upsertBucket\":null},\"errors\":[{\"message\":\"entity twu376@wisc.edu not found during upsertBucket\",\"path\":[\"upsertBucket\"]}]}"}
+{"time":"2025-12-09T02:53:03.028500384-06:00","level":"INFO","msg":"stream: closing","id":"8n3z7sdz"}
+{"time":"2025-12-09T02:53:03.028683529-06:00","level":"ERROR","msg":"sender: uploadConfigFile: runupserter: run not yet initialized"}
+{"time":"2025-12-09T02:53:03.07911271-06:00","level":"ERROR","msg":"runfiles: runupserter: run not yet initialized"}
+{"time":"2025-12-09T02:53:03.080623334-06:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-09T02:53:03.08063735-06:00","level":"INFO","msg":"handler: closed","stream_id":"8n3z7sdz"}
+{"time":"2025-12-09T02:53:03.080659852-06:00","level":"INFO","msg":"sender: closed","stream_id":"8n3z7sdz"}
+{"time":"2025-12-09T02:53:03.080663509-06:00","level":"INFO","msg":"stream: closed","id":"8n3z7sdz"}

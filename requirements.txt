@@ -1,0 +1,19 @@
+# Core dependencies
+trl
+
+# Reward computation
+nltk
+
+# Logging and tracking
+wandb
+
+# HuggingFace Hub
+huggingface_hub
+
+# Optional: vLLM for fast inference
+vllm==0.10.2
+
+# Utilities
+peft
+bitsandbytes
+datasets==3.6.0

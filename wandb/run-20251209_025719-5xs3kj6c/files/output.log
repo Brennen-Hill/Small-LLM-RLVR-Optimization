@@ -1,0 +1,87 @@
+[34m[1mwandb[0m: Detected [huggingface_hub.inference, openai] in use.
+[34m[1mwandb[0m: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+[34m[1mwandb[0m: For more information, check out the docs at: https://weave-docs.wandb.ai/
+INFO:__main__:Loading and processing datasets...
+INFO:data_processing:Loading MBPP dataset...
+0000.parquet: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 216k/216k [00:00<00:00, 11.4MB/s]
+Generating test split: 100%|███████████████████████████████████████████████████████████████████████████████| 974/974 [00:00<00:00, 42173.39 examples/s]
+INFO:data_processing:Original MBPP columns: ['task_id', 'text', 'code', 'test_list', 'test_setup_code', 'challenge_test_list']
+INFO:data_processing:Original MBPP size: 974
+INFO:data_processing:Processed MBPP columns: ['prompt', 'sample_code']
+INFO:data_processing:Processed MBPP size: 9
+INFO:data_processing:Loading APPS dataset...
+README.md: 5.63kB [00:00, 16.6MB/s]
+apps.py: 4.95kB [00:00, 13.2MB/s]
+train.jsonl: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████| 107M/107M [00:01<00:00, 54.2MB/s]
+test.jsonl: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████| 1.29G/1.29G [00:03<00:00, 326MB/s]
+Generating train split: 5000 examples [00:00, 8753.68 examples/s]
+Generating test split: 5000 examples [00:06, 764.55 examples/s] 
+INFO:data_processing:Original APPS columns: ['problem_id', 'question', 'solutions', 'input_output', 'difficulty', 'url', 'starter_code']
+INFO:data_processing:Original APPS size: 5000
+Map: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:00<00:00, 5431.52 examples/s]
+Filter: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:00<00:00, 33323.04 examples/s]
+INFO:data_processing:Processed APPS columns: ['prompt', 'sample_code']
+INFO:data_processing:Processed APPS size: 50
+INFO:__main__:MBPP dataset size: 9
+INFO:__main__:APPS dataset size: 50
+INFO:__main__:==================================================
+INFO:__main__:Starting SFT Warmup Training
+INFO:__main__:==================================================
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 709.54 examples/s]
+config.json: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 727/727 [00:00<00:00, 3.36MB/s]
+model.safetensors: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 3.44G/3.44G [00:11<00:00, 308MB/s]
+generation_config.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 138/138 [00:00<00:00, 920kB/s]
+tokenizer_config.json: 9.68kB [00:00, 20.4MB/s]
+vocab.json: 2.78MB [00:00, 113MB/s]
+merges.txt: 1.67MB [00:00, 160MB/s]
+tokenizer.json: 7.03MB [00:00, 306MB/s]
+Adding EOS to train dataset: 100%|██████████████████████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 1747.87 examples/s]
+Tokenizing train dataset:   0%|                                                                                           | 0/9 [00:00<?, ? examples/s]
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 343, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 312, in main
+    sft_model_path = run_sft_warmup(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 147, in run_sft_warmup
+    trainer = SFTTrainer(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 805, in __init__
+    train_dataset = self._prepare_dataset(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1035, in _prepare_dataset
+    dataset = dataset.map(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 557, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3079, in map
+    for rank, done, content in Dataset._map_single(**dataset_kwargs):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3501, in _map_single
+    for i, example in iter_outputs(shard_iterable):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3475, in iter_outputs
+    yield i, apply_function(example, i, offset=offset)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3398, in apply_function
+    processed_inputs = function(*fn_args, *additional_args, **fn_kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 988, in tokenize_fn
+    prompt_completion_ids = processing_class(text=example["prompt"] + example["completion"])[
+KeyError: 'completion'
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 343, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 312, in main
+    sft_model_path = run_sft_warmup(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 147, in run_sft_warmup
+    trainer = SFTTrainer(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 805, in __init__
+    train_dataset = self._prepare_dataset(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1035, in _prepare_dataset
+    dataset = dataset.map(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 557, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3079, in map
+    for rank, done, content in Dataset._map_single(**dataset_kwargs):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3501, in _map_single
+    for i, example in iter_outputs(shard_iterable):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3475, in iter_outputs
+    yield i, apply_function(example, i, offset=offset)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3398, in apply_function
+    processed_inputs = function(*fn_args, *additional_args, **fn_kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 988, in tokenize_fn
+    prompt_completion_ids = processing_class(text=example["prompt"] + example["completion"])[
+KeyError: 'completion'

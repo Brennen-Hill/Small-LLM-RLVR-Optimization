@@ -1,0 +1,66 @@
+[34m[1mwandb[0m: Detected [huggingface_hub.inference, openai] in use.
+[34m[1mwandb[0m: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+[34m[1mwandb[0m: For more information, check out the docs at: https://weave-docs.wandb.ai/
+INFO:__main__:Loading and processing datasets...
+INFO:data_processing:Loading MBPP dataset...
+INFO:data_processing:Original MBPP columns: ['task_id', 'text', 'code', 'test_list', 'test_setup_code', 'challenge_test_list']
+INFO:data_processing:Original MBPP size: 974
+INFO:data_processing:Processed MBPP columns: ['prompt', 'completion']
+INFO:data_processing:Processed MBPP size: 9
+INFO:data_processing:Loading APPS dataset...
+INFO:data_processing:Original APPS columns: ['problem_id', 'question', 'solutions', 'input_output', 'difficulty', 'url', 'starter_code']
+INFO:data_processing:Original APPS size: 5000
+Map: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:00<00:00, 7078.80 examples/s]
+Filter: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:00<00:00, 320945.17 examples/s]
+INFO:data_processing:Processed APPS columns: ['prompt', 'completion']
+INFO:data_processing:Processed APPS size: 50
+INFO:__main__:MBPP dataset size: 9
+INFO:__main__:APPS dataset size: 50
+INFO:__main__:==================================================
+INFO:__main__:Starting SFT Warmup Training
+INFO:__main__:==================================================
+Map:   0%|                                                                                                                | 0/9 [00:00<?, ? examples/s]
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 343, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 312, in main
+    sft_model_path = run_sft_warmup(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 133, in run_sft_warmup
+    formatted_dataset = dataset.map(format_for_sft)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 557, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3079, in map
+    for rank, done, content in Dataset._map_single(**dataset_kwargs):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3501, in _map_single
+    for i, example in iter_outputs(shard_iterable):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3475, in iter_outputs
+    yield i, apply_function(example, i, offset=offset)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3398, in apply_function
+    processed_inputs = function(*fn_args, *additional_args, **fn_kwargs)
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 130, in format_for_sft
+    "text": f"### Instruction:\n{example['prompt']}\n\n### Response:\n{example['sample_code']}"
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/formatting/formatting.py", line 278, in __getitem__
+    value = self.data[key]
+KeyError: 'sample_code'
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 343, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 312, in main
+    sft_model_path = run_sft_warmup(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 133, in run_sft_warmup
+    formatted_dataset = dataset.map(format_for_sft)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 557, in wrapper
+    out: Union["Dataset", "DatasetDict"] = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3079, in map
+    for rank, done, content in Dataset._map_single(**dataset_kwargs):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3501, in _map_single
+    for i, example in iter_outputs(shard_iterable):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3475, in iter_outputs
+    yield i, apply_function(example, i, offset=offset)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 3398, in apply_function
+    processed_inputs = function(*fn_args, *additional_args, **fn_kwargs)
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 130, in format_for_sft
+    "text": f"### Instruction:\n{example['prompt']}\n\n### Response:\n{example['sample_code']}"
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/formatting/formatting.py", line 278, in __getitem__
+    value = self.data[key]
+KeyError: 'sample_code'

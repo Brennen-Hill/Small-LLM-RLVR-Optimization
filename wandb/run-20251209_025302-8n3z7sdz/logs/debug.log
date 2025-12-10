@@ -1,0 +1,15 @@
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_setup.py:_flush():80] Current SDK version is 0.23.1
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_setup.py:_flush():80] Configure stats pid to 215107
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_setup.py:_flush():80] Loading settings from /hdd3/albertwu/.config/wandb/settings
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_setup.py:_flush():80] Loading settings from /hdd3/albertwu/mini_rlvr/wandb/settings
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /hdd3/albertwu/mini_rlvr/wandb/run-20251209_025302-8n3z7sdz/logs/debug.log
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /hdd3/albertwu/mini_rlvr/wandb/run-20251209_025302-8n3z7sdz/logs/debug-internal.log
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_init.py:init():841] calling init triggers
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'model_name': 'Qwen/Qwen3-1.7B-Base', 'hub_username': 'HuggingFaceAlbert', 'sample_ratio': 0.01, 'per_device_batch_size': 1, 'sft_epochs': 1, 'skip_sft': False, 'sft_checkpoint': None, 'output_dir': './outputs', 'push_to_hub': True, 'use_vllm': False, 'local_rank': -1, '_wandb': {}}
+2025-12-09 02:53:02,482 INFO    MainThread:215107 [wandb_init.py:init():889] starting backend
+2025-12-09 02:53:02,736 INFO    MainThread:215107 [wandb_init.py:init():892] sending inform_init request
+2025-12-09 02:53:02,739 INFO    MainThread:215107 [wandb_init.py:init():900] backend started and connected
+2025-12-09 02:53:02,740 INFO    MainThread:215107 [wandb_init.py:init():970] updated telemetry
+2025-12-09 02:53:02,741 INFO    MainThread:215107 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
