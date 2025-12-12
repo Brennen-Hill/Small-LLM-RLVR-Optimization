@@ -27,14 +27,14 @@ GRPOTrainer.create_model_card = mock_create_model_card
 class ExperimentConfig:
     """Controls the switch between Test (Debugging) and Production modes."""
     # Toggle this to False for the full run
-    TEST_MODE: bool = True 
+    TEST_MODE: bool = False 
  
     @property
-    def max_steps(self): return 10 if self.TEST_MODE else 300
+    def max_steps(self): return 10 if self.TEST_MODE else 50
     
     # Needs to be >1 for GRPO to calculate variance/advantage
     @property
-    def num_generations(self): return 4 if self.TEST_MODE else 8
+    def num_generations(self): return 4 if self.TEST_MODE else 4
     
     @property
     def batch_size(self): return 1 if self.TEST_MODE else 4
