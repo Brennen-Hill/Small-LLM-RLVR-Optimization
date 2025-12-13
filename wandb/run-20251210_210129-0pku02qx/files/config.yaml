@@ -1,0 +1,102 @@
+_wandb:
+    value:
+        cli_version: 0.23.1
+        e:
+            0f4wcpwuwsrmwsowhdcv24imwbqnwoze:
+                args:
+                    - --sample_ratio=1
+                    - --baseline=grpo
+                    - --per_device_batch_size=32
+                    - --num_generations=4
+                codePath: train_grpo_single.py
+                codePathLocal: train_grpo_single.py
+                cpu_count: 12
+                cpu_count_logical: 24
+                cudaVersion: "12.4"
+                disk:
+                    /:
+                        total: "466766602240"
+                        used: "436457549824"
+                email: twu376@wisc.edu
+                executable: /hdd3/albertwu/miniconda3/envs/rlvr/bin/python
+                git:
+                    commit: a2a052cab232cb3153254922bd1e847a37798332
+                    remote: git@github.com:Brennen-Hill/CS839.git
+                gpu: NVIDIA RTX A6000
+                gpu_count: 2
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 10752
+                      memoryTotal: "51527024640"
+                      name: NVIDIA RTX A6000
+                      uuid: GPU-f521e10d-d7e3-3369-1305-a7494180d1b0
+                    - architecture: Ampere
+                      cudaCores: 5888
+                      memoryTotal: "8589934592"
+                      name: NVIDIA GeForce RTX 3070
+                      uuid: GPU-59aeb9e1-9077-41b6-fca7-ad6d4c237f6d
+                host: fred-desktop-2
+                memory:
+                    total: "101135749120"
+                os: Linux-5.15.0-107-generic-x86_64-with-glibc2.31
+                program: /hdd3/albertwu/mini_rlvr/train_grpo_single.py
+                python: CPython 3.10.19
+                root: /hdd3/albertwu/mini_rlvr
+                startedAt: "2025-12-11T03:01:29.382180Z"
+                writerId: 0f4wcpwuwsrmwsowhdcv24imwbqnwoze
+        m: []
+        python_version: 3.10.19
+        t:
+            "1":
+                - 1
+                - 11
+                - 41
+                - 49
+                - 51
+                - 71
+                - 84
+                - 95
+                - 98
+            "2":
+                - 1
+                - 11
+                - 41
+                - 49
+                - 51
+                - 71
+                - 84
+                - 95
+                - 98
+            "3":
+                - 16
+            "4": 3.10.19
+            "5": 0.23.1
+            "6": 4.57.3
+            "12": 0.23.1
+            "13": linux-x86_64
+baseline:
+    value: grpo
+hub_username:
+    value: HuggingFaceAlbert
+local_rank:
+    value: -1
+model_name:
+    value: Qwen/Qwen3-1.7B-Base
+num_generations:
+    value: 4
+output_dir:
+    value: ./outputs
+per_device_batch_size:
+    value: 32
+push_to_hub:
+    value: true
+sample_ratio:
+    value: 1
+sft_checkpoint:
+    value: null
+sft_epochs:
+    value: 5
+skip_sft:
+    value: false
+use_vllm:
+    value: false

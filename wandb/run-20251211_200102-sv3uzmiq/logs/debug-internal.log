@@ -1,0 +1,13 @@
+{"time":"2025-12-11T20:01:03.125599091-06:00","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-11T20:01:03.313876726-06:00","level":"INFO","msg":"stream: created new stream","id":"sv3uzmiq"}
+{"time":"2025-12-11T20:01:03.314050874-06:00","level":"INFO","msg":"handler: started","stream_id":"sv3uzmiq"}
+{"time":"2025-12-11T20:01:03.314404901-06:00","level":"INFO","msg":"stream: started","id":"sv3uzmiq"}
+{"time":"2025-12-11T20:01:03.314437472-06:00","level":"INFO","msg":"sender: started","stream_id":"sv3uzmiq"}
+{"time":"2025-12-11T20:01:03.314438133-06:00","level":"INFO","msg":"writer: started","stream_id":"sv3uzmiq"}
+{"time":"2025-12-12T08:21:13.677109119-06:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/twu376-uw-madison/mini_rlvr/sv3uzmiq/file_stream\": EOF"}
+{"time":"2025-12-12T11:45:42.192854232-06:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-12T11:45:42.43271887-06:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-12-12T11:45:42.442807806-06:00","level":"INFO","msg":"stream: closing","id":"sv3uzmiq"}
+{"time":"2025-12-12T11:45:42.442827463-06:00","level":"INFO","msg":"handler: closed","stream_id":"sv3uzmiq"}
+{"time":"2025-12-12T11:45:42.442877707-06:00","level":"INFO","msg":"sender: closed","stream_id":"sv3uzmiq"}
+{"time":"2025-12-12T11:45:42.4429003-06:00","level":"INFO","msg":"stream: closed","id":"sv3uzmiq"}

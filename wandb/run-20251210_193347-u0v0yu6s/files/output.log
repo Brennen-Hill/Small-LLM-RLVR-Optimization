@@ -1,0 +1,73 @@
+[34m[1mwandb[0m: Detected [huggingface_hub.inference, openai] in use.
+[34m[1mwandb[0m: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+[34m[1mwandb[0m: For more information, check out the docs at: https://weave-docs.wandb.ai/
+INFO:__main__:Loading and processing datasets...
+INFO:data_processing:Loading MBPP dataset...
+INFO:data_processing:Original MBPP columns: ['task_id', 'text', 'code', 'test_list', 'test_setup_code', 'challenge_test_list']
+INFO:data_processing:Original MBPP size: 974
+INFO:data_processing:Processed MBPP columns: ['prompt', 'completion']
+INFO:data_processing:Processed MBPP size: 9
+INFO:data_processing:Loading APPS dataset...
+INFO:data_processing:Original APPS columns: ['problem_id', 'question', 'solutions', 'input_output', 'difficulty', 'url', 'starter_code']
+INFO:data_processing:Original APPS size: 5000
+INFO:data_processing:Processed APPS columns: ['prompt', 'completion']
+INFO:data_processing:Processed APPS size: 50
+INFO:__main__:MBPP dataset size: 9
+INFO:__main__:APPS dataset size: 50
+INFO:__main__:Skipping SFT warmup, using base model for GRPO
+INFO:__main__:==================================================
+INFO:__main__:Starting GRPO Training
+INFO:__main__:==================================================
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+  0%|                                                                                                         | 0/150 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 372, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 352, in main
+    run_grpo_training(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 237, in run_grpo_training
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2316, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4014, in training_step
+    inputs = self._prepare_inputs(inputs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/extras/profiling.py", line 98, in wrapper
+    return func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1067, in _prepare_inputs
+    generation_batch = self._generate_and_score_completions(generation_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1594, in _generate_and_score_completions
+    rewards_per_func = self._calculate_rewards(inputs, prompts, completions, completion_ids_list)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/extras/profiling.py", line 98, in wrapper
+    return func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1112, in _calculate_rewards
+    output_reward_func = reward_func(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 96, in bleu_reward_function
+    references_raw = kwargs["completion"]
+KeyError: 'completion'
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 372, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 352, in main
+    run_grpo_training(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 237, in run_grpo_training
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2316, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4014, in training_step
+    inputs = self._prepare_inputs(inputs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/extras/profiling.py", line 98, in wrapper
+    return func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1067, in _prepare_inputs
+    generation_batch = self._generate_and_score_completions(generation_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1594, in _generate_and_score_completions
+    rewards_per_func = self._calculate_rewards(inputs, prompts, completions, completion_ids_list)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/extras/profiling.py", line 98, in wrapper
+    return func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1112, in _calculate_rewards
+    output_reward_func = reward_func(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 96, in bleu_reward_function
+    references_raw = kwargs["completion"]
+KeyError: 'completion'

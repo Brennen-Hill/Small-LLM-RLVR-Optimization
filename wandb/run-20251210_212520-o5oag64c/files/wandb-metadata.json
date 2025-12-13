@@ -1,0 +1,53 @@
+{
+  "os":  "Linux-5.15.0-107-generic-x86_64-with-glibc2.31",
+  "python":  "CPython 3.10.19",
+  "startedAt":  "2025-12-11T03:25:20.403753Z",
+  "args":  [
+    "--sample_ratio=1",
+    "--baseline=grpo",
+    "--per_device_batch_size=28",
+    "--num_generations=4"
+  ],
+  "program":  "/hdd3/albertwu/mini_rlvr/train_grpo_single.py",
+  "codePath":  "train_grpo_single.py",
+  "codePathLocal":  "train_grpo_single.py",
+  "git":  {
+    "remote":  "git@github.com:Brennen-Hill/CS839.git",
+    "commit":  "a2a052cab232cb3153254922bd1e847a37798332"
+  },
+  "email":  "twu376@wisc.edu",
+  "root":  "/hdd3/albertwu/mini_rlvr",
+  "host":  "fred-desktop-2",
+  "executable":  "/hdd3/albertwu/miniconda3/envs/rlvr/bin/python",
+  "cpu_count":  12,
+  "cpu_count_logical":  24,
+  "gpu":  "NVIDIA RTX A6000",
+  "gpu_count":  2,
+  "disk":  {
+    "/":  {
+      "total":  "466766602240",
+      "used":  "436457553920"
+    }
+  },
+  "memory":  {
+    "total":  "101135749120"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA RTX A6000",
+      "memoryTotal":  "51527024640",
+      "cudaCores":  10752,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-f521e10d-d7e3-3369-1305-a7494180d1b0"
+    },
+    {
+      "name":  "NVIDIA GeForce RTX 3070",
+      "memoryTotal":  "8589934592",
+      "cudaCores":  5888,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-59aeb9e1-9077-41b6-fca7-ad6d4c237f6d"
+    }
+  ],
+  "cudaVersion":  "12.4",
+  "writerId":  "tc8kz3snnyp85aes7484ga58u95lwwsf"
+}

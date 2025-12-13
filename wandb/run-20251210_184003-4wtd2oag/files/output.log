@@ -1,0 +1,46 @@
+[34m[1mwandb[0m: Detected [huggingface_hub.inference, openai] in use.
+[34m[1mwandb[0m: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+[34m[1mwandb[0m: For more information, check out the docs at: https://weave-docs.wandb.ai/
+INFO:__main__:Loading and processing datasets...
+INFO:data_processing:Loading MBPP dataset...
+INFO:data_processing:Original MBPP columns: ['task_id', 'text', 'code', 'test_list', 'test_setup_code', 'challenge_test_list']
+INFO:data_processing:Original MBPP size: 974
+INFO:data_processing:Processed MBPP columns: ['prompt', 'completion']
+INFO:data_processing:Processed MBPP size: 9
+INFO:data_processing:Loading APPS dataset...
+INFO:data_processing:Original APPS columns: ['problem_id', 'question', 'solutions', 'input_output', 'difficulty', 'url', 'starter_code']
+INFO:data_processing:Original APPS size: 5000
+INFO:data_processing:Processed APPS columns: ['prompt', 'completion']
+INFO:data_processing:Processed APPS size: 50
+INFO:__main__:MBPP dataset size: 9
+INFO:__main__:APPS dataset size: 50
+INFO:__main__:Skipping SFT warmup, using base model for GRPO
+INFO:__main__:==================================================
+INFO:__main__:Starting GRPO Training
+INFO:__main__:==================================================
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+ 67%|████████████████████████████████████████████████████████████████▋                                | 12/18 [07:00<03:23, 33.86s/it]No files have been modified since last commit. Skipping to prevent empty commit.
+{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 5e-07, 'num_tokens': 158100.0, 'completions/mean_length': 184.0, 'completions/min_length': 1.0, 'completions/max_length': 256.0, 'completions/clipped_ratio': 0.584375, 'completions/mean_terminated_length': 84.72392997741699, 'completions/min_terminated_length': 1.0, 'completions/max_terminated_length': 232.1, 'rewards/bleu_reward_function/mean': 0.0, 'rewards/bleu_reward_function/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 1.495086395740509, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'epoch': 1.67}
+WARNING:huggingface_hub.hf_api:No files have been modified since last commit. Skipping to prevent empty commit.
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 18/18 [11:51<00:00, 39.54s/it]
+{'train_runtime': 711.562, 'train_samples_per_second': 0.211, 'train_steps_per_second': 0.025, 'train_loss': 0.0, 'num_tokens': 280857.0, 'completions/mean_length': 179.22265625, 'completions/min_length': 1.0, 'completions/max_length': 256.0, 'completions/clipped_ratio': 0.5703125, 'completions/mean_terminated_length': 77.19543170928955, 'completions/min_terminated_length': 1.0, 'completions/max_terminated_length': 216.5, 'rewards/bleu_reward_function/mean': 0.0, 'rewards/bleu_reward_function/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 1.469297930598259, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'epoch': 3.0}
+No files have been modified since last commit. Skipping to prevent empty commit.
+WARNING:huggingface_hub.hf_api:No files have been modified since last commit. Skipping to prevent empty commit.
+Processing Files (4 / 4)      : 100%|████████████████████████████████████████████████████████████████████| 6.89GB / 6.89GB,  450MB/s  
+New Data Upload               : |                                                                        |  0.00B /  0.00B,  0.00B/s  
+  ...7B-GRPO/training_args.bin: 100%|████████████████████████████████████████████████████████████████████| 7.31kB / 7.31kB
+  ...-1.7B-GRPO/tokenizer.json: 100%|████████████████████████████████████████████████████████████████████| 11.4MB / 11.4MB
+  ...0002-of-00002.safetensors: 100%|████████████████████████████████████████████████████████████████████| 1.91GB / 1.91GB            
+  ...0001-of-00002.safetensors: 100%|████████████████████████████████████████████████████████████████████| 4.97GB / 4.97GB            
+No files have been modified since last commit. Skipping to prevent empty commit.
+WARNING:huggingface_hub.hf_api:No files have been modified since last commit. Skipping to prevent empty commit.
+INFO:__main__:GRPO model saved to ./outputs/Qwen3-1.7B-GRPO
+INFO:__main__:Pushing model to HuggingFace Hub: HuggingFaceAlbert/Qwen3-1.7B-GRPO
+Processing Files (4 / 4)      : 100%|████████████████████████████████████████████████████████████████████| 6.89GB / 6.89GB,  452MB/s  
+New Data Upload               : |                                                                        |  0.00B /  0.00B,  0.00B/s  
+  ...7B-GRPO/training_args.bin: 100%|████████████████████████████████████████████████████████████████████| 7.31kB / 7.31kB
+  ...-1.7B-GRPO/tokenizer.json: 100%|████████████████████████████████████████████████████████████████████| 11.4MB / 11.4MB
+  ...0001-of-00002.safetensors: 100%|████████████████████████████████████████████████████████████████████| 4.97GB / 4.97GB            
+  ...0002-of-00002.safetensors: 100%|████████████████████████████████████████████████████████████████████| 1.91GB / 1.91GB            
+No files have been modified since last commit. Skipping to prevent empty commit.
+WARNING:huggingface_hub.hf_api:No files have been modified since last commit. Skipping to prevent empty commit.

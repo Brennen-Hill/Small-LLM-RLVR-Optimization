@@ -1,0 +1,72 @@
+  1%|█▌                                                                                                                 | 1/72 [00:05<06:09,  5.20s/it]Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 23, in <module>
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2325, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1190, in training_step
+    return super().training_step(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4020, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1103, in compute_loss
+    (loss, outputs) = super().compute_loss(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4110, in compute_loss
+    outputs = model(**inputs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/accelerate/utils/operations.py", line 819, in forward
+    return model_forward(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/accelerate/utils/operations.py", line 807, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 498, in forward
+    loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 67, in ForCausalLMLoss
+    loss = fixed_cross_entropy(logits, shift_labels, num_items_in_batch, ignore_index, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 36, in fixed_cross_entropy
+    loss = nn.functional.cross_entropy(source, target, ignore_index=ignore_index, reduction=reduction)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/functional.py", line 3462, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 9.27 GiB. GPU 0 has a total capacity of 47.53 GiB of which 6.83 GiB is free. Including non-PyTorch memory, this process has 40.68 GiB memory in use. Of the allocated memory 40.31 GiB is allocated by PyTorch, and 43.98 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 23, in <module>
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2325, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1190, in training_step
+    return super().training_step(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4020, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1103, in compute_loss
+    (loss, outputs) = super().compute_loss(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4110, in compute_loss
+    outputs = model(**inputs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/accelerate/utils/operations.py", line 819, in forward
+    return model_forward(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/accelerate/utils/operations.py", line 807, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 498, in forward
+    loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 67, in ForCausalLMLoss
+    loss = fixed_cross_entropy(logits, shift_labels, num_items_in_batch, ignore_index, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 36, in fixed_cross_entropy
+    loss = nn.functional.cross_entropy(source, target, ignore_index=ignore_index, reduction=reduction)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/functional.py", line 3462, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 9.27 GiB. GPU 0 has a total capacity of 47.53 GiB of which 6.83 GiB is free. Including non-PyTorch memory, this process has 40.68 GiB memory in use. Of the allocated memory 40.31 GiB is allocated by PyTorch, and 43.98 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

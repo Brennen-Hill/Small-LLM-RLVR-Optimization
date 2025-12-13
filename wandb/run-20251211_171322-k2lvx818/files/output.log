@@ -1,0 +1,69 @@
+[34m[1mwandb[0m: Detected [huggingface_hub.inference, openai] in use.
+[34m[1mwandb[0m: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+[34m[1mwandb[0m: For more information, check out the docs at: https://weave-docs.wandb.ai/
+INFO:__main__:Loading and processing datasets...
+INFO:data_processing_optimized:Loading MBPP dataset...
+INFO:data_processing_optimized:Original MBPP columns: ['task_id', 'text', 'code', 'test_list', 'test_setup_code', 'challenge_test_list']
+INFO:data_processing_optimized:Original MBPP size: 974
+INFO:data_processing_optimized:Processed MBPP columns: ['prompt', 'completion']
+INFO:data_processing_optimized:Processed MBPP size: 9
+INFO:data_processing_optimized:Loading APPS dataset...
+INFO:data_processing_optimized:Original APPS columns: ['problem_id', 'question', 'solutions', 'input_output', 'difficulty', 'url', 'starter_code']
+INFO:data_processing_optimized:Original APPS size: 5000
+Map: 100%|███████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:00<00:00, 5579.97 examples/s]
+Filter: 100%|██████████████████████████████████████████████████████████████████████████| 5000/5000 [00:00<00:00, 314278.95 examples/s]
+INFO:data_processing_optimized:Processed APPS columns: ['prompt', 'ground_truth']
+INFO:data_processing_optimized:Processed APPS size: 50
+INFO:data_processing_optimized:Loading APPS dataset from apps_cccs.json...
+INFO:data_processing_optimized:Original APPS size: 7413
+INFO:data_processing_optimized:Difficulty score range: 42.8 (easiest) to 6260.4 (hardest)
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 414, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 364, in main
+    apps_cccs_dataset = process_apps_cccs_dataset(sample_ratio=args.sample_ratio)
+  File "/hdd3/albertwu/mini_rlvr/data_processing_optimized.py", line 241, in process_apps_cccs_dataset
+    data = Dataset.from_list(simplified_data)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 986, in from_list
+    return cls.from_dict(mapping, features, info, split)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 940, in from_dict
+    pa_table = InMemoryTable.from_pydict(mapping=mapping)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/table.py", line 758, in from_pydict
+    return cls(pa.Table.from_pydict(*args, **kwargs))
+  File "pyarrow/table.pxi", line 1985, in pyarrow.lib._Tabular.from_pydict
+  File "pyarrow/table.pxi", line 6401, in pyarrow.lib._from_pydict
+  File "pyarrow/array.pxi", line 405, in pyarrow.lib.asarray
+  File "pyarrow/array.pxi", line 256, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 118, in pyarrow.lib._handle_arrow_array_protocol
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_writer.py", line 243, in __arrow_array__
+    out = pa.array(cast_to_python_objects(data, only_1d_for_numpy=True))
+  File "pyarrow/array.pxi", line 375, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 46, in pyarrow.lib._sequence_to_array
+  File "pyarrow/error.pxi", line 155, in pyarrow.lib.pyarrow_internal_check_status
+  File "pyarrow/error.pxi", line 92, in pyarrow.lib.check_status
+pyarrow.lib.ArrowInvalid: cannot mix list and non-list, non-null values
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 414, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 364, in main
+    apps_cccs_dataset = process_apps_cccs_dataset(sample_ratio=args.sample_ratio)
+  File "/hdd3/albertwu/mini_rlvr/data_processing_optimized.py", line 241, in process_apps_cccs_dataset
+    data = Dataset.from_list(simplified_data)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 986, in from_list
+    return cls.from_dict(mapping, features, info, split)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 940, in from_dict
+    pa_table = InMemoryTable.from_pydict(mapping=mapping)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/table.py", line 758, in from_pydict
+    return cls(pa.Table.from_pydict(*args, **kwargs))
+  File "pyarrow/table.pxi", line 1985, in pyarrow.lib._Tabular.from_pydict
+  File "pyarrow/table.pxi", line 6401, in pyarrow.lib._from_pydict
+  File "pyarrow/array.pxi", line 405, in pyarrow.lib.asarray
+  File "pyarrow/array.pxi", line 256, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 118, in pyarrow.lib._handle_arrow_array_protocol
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/datasets/arrow_writer.py", line 243, in __arrow_array__
+    out = pa.array(cast_to_python_objects(data, only_1d_for_numpy=True))
+  File "pyarrow/array.pxi", line 375, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 46, in pyarrow.lib._sequence_to_array
+  File "pyarrow/error.pxi", line 155, in pyarrow.lib.pyarrow_internal_check_status
+  File "pyarrow/error.pxi", line 92, in pyarrow.lib.check_status
+pyarrow.lib.ArrowInvalid: cannot mix list and non-list, non-null values

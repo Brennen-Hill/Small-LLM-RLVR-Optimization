@@ -1,0 +1,35 @@
+tokenizer_config.json: 5.44kB [00:00, 10.2MB/s]
+vocab.json: 2.78MB [00:00, 13.0MB/s]
+merges.txt: 1.67MB [00:00, 11.7MB/s]
+tokenizer.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████████| 11.4M/11.4M [00:00<00:00, 11.8MB/s]
+added_tokens.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 707/707 [00:00<00:00, 3.08MB/s]
+special_tokens_map.json: 100%|████████████████████████████████████████████████████████████████████████████████████████| 616/616 [00:00<00:00, 2.71MB/s]
+chat_template.jinja: 4.12kB [00:00, 5.23MB/s]
+config.json: 1.36kB [00:00, 2.69MB/s]
+`torch_dtype` is deprecated! Use `dtype` instead!
+model.safetensors.index.json: 25.6kB [00:00, 68.5MB/s]
+model-00002-of-00002.safetensors: 100%|████████████████████████████████████████████████████████████████████████████| 1.91G/1.91G [00:12<00:00, 151MB/s]
+model-00001-of-00002.safetensors: 100%|████████████████████████████████████████████████████████████████████████████| 4.97G/4.97G [00:23<00:00, 214MB/s]
+Fetching 2 files: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:23<00:00, 11.70s/it]
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.44it/s]
+generation_config.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 127/127 [00:00<00:00, 826kB/s]
+
+Loading APPS dataset...
+Evaluating on 500 problems (10.0% of test split)
+Evaluating:   0%|                                                                                                              | 0/500 [00:04<?, ?it/s]
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 385, in <module>
+    evaluate_apps()
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 247, in evaluate_apps
+    passed, total = check_correctness(generated_code, test_cases)
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 115, in check_correctness
+    test_input = test_case.get("input", "")
+AttributeError: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 385, in <module>
+    evaluate_apps()
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 247, in evaluate_apps
+    passed, total = check_correctness(generated_code, test_cases)
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 115, in check_correctness
+    test_input = test_case.get("input", "")
+AttributeError: 'str' object has no attribute 'get'

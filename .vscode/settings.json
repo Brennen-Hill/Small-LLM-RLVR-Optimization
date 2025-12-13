@@ -1,9 +1,0 @@
-{
-    "terminal.integrated.defaultProfile.linux": "bash",
-    "terminal.integrated.profiles.linux": {
-        "bash": {
-            "path": "/bin/bash",
-            "args": ["-c", "unset LD_LIBRARY_PATH && bash"]
-        }
-    }
-}

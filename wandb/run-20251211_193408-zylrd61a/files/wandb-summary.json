@@ -1,0 +1,1 @@
+{"train_steps_per_second":0.044,"_wandb":{"runtime":46},"_timestamp":1.7655032791883821e+09,"total_flos":1.2786167955456e+13,"_runtime":46,"train/num_tokens":693,"train_loss":0.7330735325813293,"_step":0,"train/epoch":1,"train/global_step":1,"train/entropy":0.9504799842834473,"train/mean_token_accuracy":0.8065134286880493,"train_runtime":22.8284,"train_samples_per_second":0.394}

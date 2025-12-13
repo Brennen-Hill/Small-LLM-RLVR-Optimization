@@ -1,0 +1,180 @@
+[34m[1mwandb[0m: Detected [huggingface_hub.inference, openai] in use.
+[34m[1mwandb[0m: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+[34m[1mwandb[0m: For more information, check out the docs at: https://weave-docs.wandb.ai/
+INFO:__main__:Loading and processing datasets...
+INFO:data_processing:Loading MBPP dataset...
+INFO:data_processing:Original MBPP columns: ['task_id', 'text', 'code', 'test_list', 'test_setup_code', 'challenge_test_list']
+INFO:data_processing:Original MBPP size: 974
+INFO:data_processing:Processed MBPP columns: ['prompt', 'completion']
+INFO:data_processing:Processed MBPP size: 9
+INFO:data_processing:Loading APPS dataset...
+INFO:data_processing:Original APPS columns: ['problem_id', 'question', 'solutions', 'input_output', 'difficulty', 'url', 'starter_code']
+INFO:data_processing:Original APPS size: 5000
+INFO:data_processing:Processed APPS columns: ['prompt', 'completion']
+INFO:data_processing:Processed APPS size: 50
+INFO:__main__:MBPP dataset size: 9
+INFO:__main__:APPS dataset size: 50
+INFO:__main__:Skipping SFT warmup, using base model for GRPO
+INFO:__main__:==================================================
+INFO:__main__:Starting GRPO Training
+INFO:__main__:==================================================
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+  1%|▋                                                                                                | 1/150 [00:05<13:40,  5.51s/it]Traceback (most recent call last):
+[' The correct solution will be less than 10s.\n**我的解答**\n```\nvar elevatorDistance = function (arr);\n    let total = 0;\n    if (arr == null)\n    {\n        return 0;\n    }\n    for (let i = 0; i< arr. length; i++)\n    {\n        total += Math.abs(arr[i] - arr[i +1]);\n    }\n```   保留 Math.abs(x)，就加快运算速度，不需要每次数学运算，只需要一次。\n\n**自己的代码**\n```\nvar elevatorDistance = function (array) {\n    let total = 0;\n    for (let i = 0; i< array.length; i++)\n    {\n        total + array[i] - array[i +1];\n    }\n    return total;\n};\n```', ' However if your module gets it right for all of these you will also receive appropriate credit for special bonus tests.\n\nHINT: Climbing from floor to floor costing you the same cost as descending creates unnecessary doubles.\n\n## Solution 1 (3/30):\n\n    var elevatorDistance = function(anInt) {\n    var distance = 0;\n    for ( var i = 0; i < anInt.length - 1; i++) {   \n        distance += Math.abs(anInt[i] - anInt[i + 1])\n    }\n    return distance\n    }\n\n## Solution 2 (1/30):\n\n    function elevatorDistance(array) {\n\tvar distance = 0;\n\t\n\tfor(var i = 0; i < array.length; i++){\n\t\tdistance += Math.abs(i - (array.length - 1));\n\t}\n\treturn distance; \n    }']
+['Imagine you start on the 5th floor of a building, then travel down to the 2nd floor, then back up to the 8th floor. You have travelled a total of 3 + 6 = 9 floors of distance.\n\nGiven an array representing a series of floors you must reach by elevator, return an integer representing the total distance travelled for visiting each floor in the array in order. \n\n```\n// simple examples\nelevatorDistance([5,2,8]) = 9\nelevatorDistance([1,2,3]) = 2\nelevatorDistance([7,1,7,1]) = 18\n\n// if two consecutive floors are the same,\n//distance travelled between them is 0\nelevatorDistance([3,3]) = 0\n```\n\nArray will always contain at least 2 floors. Random tests will contain 2-20 elements in array, and floor values between 0 and 30.', 'Imagine you start on the 5th floor of a building, then travel down to the 2nd floor, then back up to the 8th floor. You have travelled a total of 3 + 6 = 9 floors of distance.\n\nGiven an array representing a series of floors you must reach by elevator, return an integer representing the total distance travelled for visiting each floor in the array in order. \n\n```\n// simple examples\nelevatorDistance([5,2,8]) = 9\nelevatorDistance([1,2,3]) = 2\nelevatorDistance([7,1,7,1]) = 18\n\n// if two consecutive floors are the same,\n//distance travelled between them is 0\nelevatorDistance([3,3]) = 0\n```\n\nArray will always contain at least 2 floors. Random tests will contain 2-20 elements in array, and floor values between 0 and 30.']
+{'completion_ids': [[576, 4396, 6291, 686, 387, 2686, 1091, 220, 16, 15, 82, 624, 334, 97611, 106185, 1019, 13874, 3989, 947, 38636, 14778, 284, 729, 320, 1118, 317, 262, 1077, 2790, 284, 220, 15, 280, 262, 421, 320, 1118, 621, 845, 340, 262, 341, 286, 470, 220, 15, 280, 262, 456, 262, 369, 320, 1149, 600, 284, 220, 15, 26, 600, 27, 2890, 13, 3084, 26, 600, 3485, 262, 341, 286, 2790, 1421, 4149, 14572, 10939, 989, 60, 481, 2890, 989, 488, 16, 2558, 262, 456, 73594, 256, 220, 104465, 4149, 14572, 2075, 69515, 80158, 100710, 118274, 101149, 3837, 104689, 102173, 104552, 118274, 3837, 107525, 99796, 3407, 334, 100005, 46100, 1019, 13874, 3989, 947, 38636, 14778, 284, 729, 320, 1653, 8, 341, 262, 1077, 2790, 284, 220, 15, 280, 262, 369, 320, 1149, 600, 284, 220, 15, 26, 600, 27, 1334, 1954, 26, 600, 3485, 262, 341, 286, 2790, 488, 1334, 989, 60, 481, 1334, 989, 488, 16, 935, 262, 456, 262, 470, 2790, 280, 2440, 73594, 151643], [4354, 421, 697, 4688, 5221, 432, 1290, 369, 678, 315, 1493, 498, 686, 1083, 5258, 8311, 6668, 369, 3281, 12037, 7032, 382, 39, 3221, 25, 61830, 7132, 504, 6422, 311, 6422, 53724, 498, 279, 1852, 2783, 438, 43084, 11450, 25165, 39296, 382, 565, 12478, 220, 16, 320, 18, 14, 18, 15, 7731, 262, 762, 38636, 14778, 284, 729, 38502, 1072, 8, 314, 198, 262, 762, 6010, 284, 220, 15, 26, 198, 262, 369, 320, 762, 600, 284, 220, 15, 26, 600, 366, 458, 1072, 1954, 481, 220, 16, 26, 600, 2457, 314, 5872, 286, 6010, 1421, 4149, 14572, 38502, 1072, 989, 60, 481, 458, 1072, 989, 488, 220, 16, 2546, 262, 456, 262, 470, 6010, 198, 262, 555, 565, 12478, 220, 17, 320, 16, 14, 18, 15, 7731, 262, 729, 38636, 14778, 6110, 8, 341, 2405, 6010, 284, 220, 15, 280, 1572, 2023, 7537, 600, 284, 220, 15, 26, 600, 366, 1334, 1954, 26, 600, 6796, 197, 98052, 1421, 4149, 14572, 1956, 481, 320, 1653, 1954, 481, 220, 16, 1106, 197, 532, 853, 6010, 26, 715, 262, 335, 151643]], 'trainer_state': TrainerState(epoch=0, global_step=0, max_steps=150, logging_steps=10, eval_steps=500, save_steps=500, train_batch_size=2, num_train_epochs=3, num_input_tokens_seen=747, total_flos=0, log_history=[], best_metric=None, best_global_step=None, best_model_checkpoint=None, is_local_process_zero=True, is_world_process_zero=True, is_hyper_param_search=False, trial_name=None, trial_params=None, stateful_callbacks={'TrainerControl': {'args': {'should_training_stop': False, 'should_epoch_stop': False, 'should_save': False, 'should_evaluate': False, 'should_log': False}, 'attributes': {}}})}
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 356, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 336, in main
+    run_grpo_training(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 222, in run_grpo_training
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2316, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4014, in training_step
+    inputs = self._prepare_inputs(inputs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/extras/profiling.py", line 98, in wrapper
+    return func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1067, in _prepare_inputs
+    generation_batch = self._generate_and_score_completions(generation_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1462, in _generate_and_score_completions
+    self._generate(prompts)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1400, in _generate
+    prompt_ids, completion_ids, logprobs, extra_fields = self._generate_single_turn(prompts)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1375, in _generate_single_turn
+    prompt_completion_ids = unwrapped_model.generate(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/generation/utils.py", line 2564, in generate
+    result = decoding_method(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/generation/utils.py", line 2787, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/accelerate/utils/operations.py", line 819, in forward
+    return model_forward(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/accelerate/utils/operations.py", line 807, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 480, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 410, in forward
+    hidden_states = decoder_layer(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 260, in forward
+    hidden_states, _ = self.self_attn(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 201, in forward
+    key_states = self.k_norm(self.k_proj(hidden_states).view(hidden_shape)).transpose(1, 2)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 64, in forward
+    return self.weight * hidden_states.to(input_dtype)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1949, in __getattr__
+    def __getattr__(self, name: str) -> Union[Tensor, "Module"]:
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 356, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 336, in main
+    run_grpo_training(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 222, in run_grpo_training
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2316, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4014, in training_step
+    inputs = self._prepare_inputs(inputs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/extras/profiling.py", line 98, in wrapper
+    return func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1067, in _prepare_inputs
+    generation_batch = self._generate_and_score_completions(generation_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1462, in _generate_and_score_completions
+    self._generate(prompts)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1400, in _generate
+    prompt_ids, completion_ids, logprobs, extra_fields = self._generate_single_turn(prompts)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 1375, in _generate_single_turn
+    prompt_completion_ids = unwrapped_model.generate(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/generation/utils.py", line 2564, in generate
+    result = decoding_method(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/generation/utils.py", line 2787, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/accelerate/utils/operations.py", line 819, in forward
+    return model_forward(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/accelerate/utils/operations.py", line 807, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 480, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 410, in forward
+    hidden_states = decoder_layer(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 260, in forward
+    hidden_states, _ = self.self_attn(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 201, in forward
+    key_states = self.k_norm(self.k_proj(hidden_states).view(hidden_shape)).transpose(1, 2)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 64, in forward
+    return self.weight * hidden_states.to(input_dtype)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1949, in __getattr__
+    def __getattr__(self, name: str) -> Union[Tensor, "Module"]:
+KeyboardInterrupt

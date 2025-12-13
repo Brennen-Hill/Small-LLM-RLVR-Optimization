@@ -9,6 +9,10 @@ For multi-GPU: torchrun --nproc_per_node=<num_gpus> train_single_machine.py [arg
 
 import argparse
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# Enable expandable segments to help mitigate CUDA memory fragmentation
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
 import logging
 from typing import List
 
@@ -17,14 +21,16 @@ import wandb
 from datasets import Dataset
 from transformers import AutoTokenizer
 from trl import SFTTrainer, SFTConfig, GRPOConfig, GRPOTrainer
+import time
 
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
-from data_processing import process_mbpp_dataset, process_apps_dataset
+from data_processing import process_mbpp_dataset, process_apps_dataset, process_apps_cccs_dataset
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+NUM_GENERATIONS = 2
 
 # ============================================================================
 # Reward Function: BLEU Score
@@ -68,33 +74,70 @@ def compute_bleu_reward(completions: List[str], references: List[str], **kwargs)
     return rewards
 
 
-def bleu_reward_function(completions, prompts=None, **kwargs):
+def bleu_reward_function(completions, ground_truth, prompts=None, **kwargs):
     """
-    TRL-compatible reward function wrapper.
-    
-    This function is called by GRPOTrainer with generated completions.
-    We need to extract the completion from the dataset to use as reference.
+    BLEU reward function hardcoded for:
+      - APPS dataset processed into {'prompt', 'completion'} => here passed as ground_truth
+      - completions may come in different TRL formats:
+          [["text"]], ["text"], [{"content": "text"}], [[{"content": "text"}]]
     """
-    # Extract text content from completions
-    if isinstance(completions[0], list):
-        # Handle batch format: [[{"content": "..."}], ...]
-        completion_texts = []
-        for comp in completions:
-            if isinstance(comp, list) and len(comp) > 0:
-                if isinstance(comp[0], dict):
-                    completion_texts.append(comp[0].get("content", ""))
-                else:
-                    completion_texts.append(str(comp[0]))
-            else:
-                completion_texts.append(str(comp))
-    else:
-        completion_texts = [str(c) for c in completions]
-    
-    # Get references from kwargs if available
-    references = kwargs.get("completion", [""] * len(completion_texts))
-    
-    rewards = compute_bleu_reward(completion_texts, references)
-    return [torch.tensor(r) for r in rewards]
+
+    # ----------------------------------------------------
+    # 1. Extract generated completions (robust)
+    # ----------------------------------------------------
+    def extract_text(c):
+        # Case A: [["text"]] → take c[0] → "text"
+        if isinstance(c, list):
+            if len(c) == 0:
+                return ""
+            first = c[0]
+
+            # Case A1: [{"content": "text"}]
+            if isinstance(first, dict):
+                return first.get("content", "")
+
+            # Case A2: ["text"]
+            if isinstance(first, str):
+                return first
+
+            # Case A3: nested lists like [[{"content": ...}]]
+            return extract_text(first)
+
+        # Case B: {"content": "text"}
+        if isinstance(c, dict):
+            return c.get("content", "")
+
+        # Case C: already a raw string
+        return str(c)
+
+    completion_texts = [extract_text(c) for c in completions]
+
+    # ----------------------------------------------------
+    # 2. Extract references from dataset
+    # ----------------------------------------------------
+    # ground_truth is already a list of reference strings
+    references_raw = ground_truth  # ex: ["solution1", "solution2", ...]
+
+    # ----------------------------------------------------
+    # 3. Expand references to match flattened completions
+    # ----------------------------------------------------
+    expanded_refs = []
+    for ref in references_raw:
+        expanded_refs.extend([ref] * NUM_GENERATIONS)
+
+    # Truncate to match completions exactly
+    expanded_refs = expanded_refs[:len(completion_texts)]
+
+    # ----------------------------------------------------
+    # 4. Compute BLEU rewards
+    # ----------------------------------------------------
+    rewards = compute_bleu_reward(completion_texts, expanded_refs)
+
+    # ----------------------------------------------------
+    # 5. Return torch tensors
+    # ----------------------------------------------------
+    return [torch.tensor(r, dtype=torch.float32) for r in rewards]
+
 
 
 # ============================================================================
@@ -142,10 +185,17 @@ def run_sft_warmup(
         gradient_checkpointing=True,
         report_to="wandb" if local_rank <= 0 else "none",
     )
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_name,
+        trust_remote_code=True,
+        fix_mistral_regex=True,
+    )
     
     # Initialize SFT Trainer
     trainer = SFTTrainer(
         model=model_name,
+        processing_class=tokenizer,
         args=sft_config,
         train_dataset=formatted_dataset,
     )
@@ -164,11 +214,13 @@ def run_grpo_training(
     model_name: str,
     dataset: Dataset,
     output_dir: str,
-    per_device_batch_size: int = 1,
+    num_generations: int = NUM_GENERATIONS,
+    per_device_batch_size: int = 2,
     local_rank: int = -1,
     use_vllm: bool = False,
     push_to_hub: bool = True,
     hub_username: str = "HuggingFaceAlbert",
+    baseline: str = "grpo"
 ):
     """
     Run GRPO training on APPS dataset with BLEU reward.
@@ -186,10 +238,12 @@ def run_grpo_training(
     logger.info("=" * 50)
     logger.info("Starting GRPO Training")
     logger.info("=" * 50)
-    
+
+    hub_model_id = f"{hub_username}/Qwen3-1.7B-{baseline}-{int(time.time())}"
     # GRPO Training Config
     grpo_config = GRPOConfig(
         output_dir=output_dir,
+        num_generations=num_generations,
         per_device_train_batch_size=per_device_batch_size,
         save_strategy="epoch",
         bf16=torch.cuda.is_available() and torch.cuda.is_bf16_supported(),
@@ -197,12 +251,23 @@ def run_grpo_training(
         report_to="wandb" if local_rank <= 0 else "none",
         use_vllm=use_vllm,
         push_to_hub=push_to_hub,
-        hub_model_id=f"{hub_username}/Qwen3-1.7B-GRPO" if push_to_hub else None,
+        hub_model_id=hub_model_id if push_to_hub else None,
+
+        save_strategy="steps",
+        save_steps=200,
+        save_total_limit=1,
     )
     
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_name,
+        trust_remote_code=True,
+        fix_mistral_regex=True,
+    )
+
     # Initialize GRPO Trainer
     trainer = GRPOTrainer(
         model=model_name,
+        processing_class=tokenizer,
         reward_funcs=bleu_reward_function,
         args=grpo_config,
         train_dataset=dataset,
@@ -217,7 +282,7 @@ def run_grpo_training(
     
     # Push to hub
     if push_to_hub and local_rank <= 0:
-        logger.info(f"Pushing model to HuggingFace Hub: {hub_username}/Qwen3-1.7B-GRPO")
+        logger.info(f"Pushing model to HuggingFace Hub: {hub_model_id}")
         trainer.push_to_hub()
     
     return output_dir
@@ -241,9 +306,14 @@ def main():
                         help="Fraction of dataset to use (default: 1%)")
     
     # Training arguments
-    parser.add_argument("--per_device_batch_size", type=int, default=1,
+    parser.add_argument("--baseline", type=str, default="grpo",
+                        help="Name of the baseline")
+    parser.add_argument("--per_device_batch_size", type=int, default=2,
                         help="Training batch size per device")
-    parser.add_argument("--sft_epochs", type=int, default=1,
+    NUM_GENERATIONS = 4
+    parser.add_argument("--num_generations", type=int, default=NUM_GENERATIONS,
+                    help="Number of generation per input")
+    parser.add_argument("--sft_epochs", type=int, default=5,
                         help="Number of SFT warmup epochs")
     parser.add_argument("--skip_sft", action="store_true",
                         help="Skip SFT warmup and go directly to GRPO")
@@ -292,6 +362,7 @@ def main():
     
     mbpp_dataset = process_mbpp_dataset(sample_ratio=args.sample_ratio)
     apps_dataset = process_apps_dataset(sample_ratio=args.sample_ratio)
+    apps_cccs_dataset = process_apps_cccs_dataset(sample_ratio=args.sample_ratio)
     
     logger.info(f"MBPP dataset size: {len(mbpp_dataset)}")
     logger.info(f"APPS dataset size: {len(apps_dataset)}")
@@ -325,6 +396,7 @@ def main():
         model_name=sft_model_path,
         dataset=apps_dataset,
         output_dir=grpo_output_dir,
+        num_generations=args.num_generations,
         per_device_batch_size=args.per_device_batch_size,
         local_rank=args.local_rank,
         use_vllm=args.use_vllm,

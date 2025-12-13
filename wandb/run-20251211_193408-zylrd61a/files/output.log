@@ -1,0 +1,60 @@
+[34m[1mwandb[0m: Detected [huggingface_hub.inference, openai] in use.
+[34m[1mwandb[0m: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+[34m[1mwandb[0m: For more information, check out the docs at: https://weave-docs.wandb.ai/
+INFO:__main__:Loading and processing datasets...
+INFO:data_processing_optimized:Loading MBPP dataset...
+INFO:data_processing_optimized:Original MBPP columns: ['task_id', 'text', 'code', 'test_list', 'test_setup_code', 'challenge_test_list']
+INFO:data_processing_optimized:Original MBPP size: 974
+INFO:data_processing_optimized:Processed MBPP columns: ['prompt', 'completion']
+INFO:data_processing_optimized:Processed MBPP size: 9
+INFO:data_processing_optimized:Loading APPS dataset...
+INFO:data_processing_optimized:Original APPS columns: ['problem_id', 'question', 'solutions', 'input_output', 'difficulty', 'url', 'starter_code']
+INFO:data_processing_optimized:Original APPS size: 5000
+INFO:data_processing_optimized:Processed APPS columns: ['prompt', 'ground_truth']
+INFO:data_processing_optimized:Processed APPS size: 50
+INFO:data_processing_optimized:Loading APPS dataset from apps_cccs.json...
+INFO:data_processing_optimized:Original APPS size: 7413
+INFO:data_processing_optimized:Difficulty score range: 42.8 (easiest) to 6260.4 (hardest)
+INFO:data_processing_optimized:Processed APPS columns: ['prompt', 'ground_truth', 'inputs', 'outputs']
+INFO:data_processing_optimized:Processed APPS size: 74 (from 7413 after filtering)
+INFO:__main__:MBPP dataset size: 9
+INFO:__main__:APPS dataset size: 50
+INFO:__main__:==================================================
+INFO:__main__:Starting SFT Warmup Training
+INFO:__main__:==================================================
+Map: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 2855.64 examples/s]
+Adding EOS to train dataset: 100%|██████████████████████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 2373.84 examples/s]
+Tokenizing train dataset:   0%|                                                                                           | 0/9 [00:00<?, ? examples/s]WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+WARNING:trl.trainer.sft_trainer:Mismatch between tokenized prompt and the start of tokenized prompt+completion. This may be due to unexpected tokenizer behavior, whitespace issues, or special token handling. Verify that the tokenizer is processing text consistently.
+Tokenizing train dataset: 100%|██████████████████████████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 958.33 examples/s]
+Truncating train dataset: 100%|█████████████████████████████████████████████████████████████████████████████████| 9/9 [00:00<00:00, 1770.33 examples/s]
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:22<00:00, 22.83s/it]
+{'train_runtime': 22.8284, 'train_samples_per_second': 0.394, 'train_steps_per_second': 0.044, 'train_loss': 0.7330735325813293, 'entropy': 0.9504799842834473, 'num_tokens': 693.0, 'mean_token_accuracy': 0.8065134286880493, 'epoch': 1.0}
+INFO:__main__:SFT model saved to ./outputs/sft_checkpoint
+INFO:__main__:==================================================
+INFO:__main__:Starting GRPO Training
+INFO:__main__:==================================================
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 531, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 511, in main
+    run_grpo_training(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 343, in run_grpo_training
+    grpo_config = GRPOConfig(
+TypeError: GRPOConfig.__init__() got an unexpected keyword argument 'epsilon_low'
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 531, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 511, in main
+    run_grpo_training(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single_optimized.py", line 343, in run_grpo_training
+    grpo_config = GRPOConfig(
+TypeError: GRPOConfig.__init__() got an unexpected keyword argument 'epsilon_low'

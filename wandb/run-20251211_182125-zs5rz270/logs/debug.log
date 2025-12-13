@@ -1,0 +1,23 @@
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_setup.py:_flush():80] Current SDK version is 0.23.1
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_setup.py:_flush():80] Configure stats pid to 1306992
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_setup.py:_flush():80] Loading settings from /hdd3/albertwu/.config/wandb/settings
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_setup.py:_flush():80] Loading settings from /hdd3/albertwu/mini_rlvr/wandb/settings
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /hdd3/albertwu/mini_rlvr/wandb/run-20251211_182125-zs5rz270/logs/debug.log
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /hdd3/albertwu/mini_rlvr/wandb/run-20251211_182125-zs5rz270/logs/debug-internal.log
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_init.py:init():841] calling init triggers
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'model_name': 'Qwen/Qwen3-1.7B-Base', 'hub_username': 'HuggingFaceAlbert', 'sample_ratio': 0.01, 'baseline': 'grpo', 'per_device_batch_size': 2, 'num_generations': 2, 'sft_epochs': 1, 'skip_sft': True, 'sft_checkpoint': None, 'output_dir': './outputs', 'push_to_hub': True, 'use_vllm': False, 'local_rank': -1, '_wandb': {}}
+2025-12-11 18:21:25,767 INFO    MainThread:1306992 [wandb_init.py:init():889] starting backend
+2025-12-11 18:21:25,996 INFO    MainThread:1306992 [wandb_init.py:init():892] sending inform_init request
+2025-12-11 18:21:25,999 INFO    MainThread:1306992 [wandb_init.py:init():900] backend started and connected
+2025-12-11 18:21:26,000 INFO    MainThread:1306992 [wandb_init.py:init():970] updated telemetry
+2025-12-11 18:21:26,004 INFO    MainThread:1306992 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2025-12-11 18:21:26,414 INFO    MainThread:1306992 [wandb_init.py:init():1041] starting run threads in backend
+2025-12-11 18:21:26,500 INFO    MainThread:1306992 [wandb_run.py:_console_start():2521] atexit reg
+2025-12-11 18:21:26,500 INFO    MainThread:1306992 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2025-12-11 18:21:26,500 INFO    MainThread:1306992 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2025-12-11 18:21:26,500 INFO    MainThread:1306992 [wandb_run.py:_redirect():2461] Redirects installed.
+2025-12-11 18:21:26,502 INFO    MainThread:1306992 [wandb_init.py:init():1081] run started, returning control to user process
+2025-12-11 18:21:28,955 INFO    wandb-AsyncioManager-main:1306992 [service_client.py:_forward_responses():80] Reached EOF.
+2025-12-11 18:21:28,955 INFO    wandb-AsyncioManager-main:1306992 [mailbox.py:close():137] Closing mailbox, abandoning 1 handles.

@@ -1,0 +1,44 @@
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_setup.py:_flush():80] Current SDK version is 0.23.1
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_setup.py:_flush():80] Configure stats pid to 903748
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_setup.py:_flush():80] Loading settings from /hdd3/albertwu/.config/wandb/settings
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_setup.py:_flush():80] Loading settings from /hdd3/albertwu/mini_rlvr/wandb/settings
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /hdd3/albertwu/mini_rlvr/wandb/run-20251210_193145-6s7sqbl5/logs/debug.log
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /hdd3/albertwu/mini_rlvr/wandb/run-20251210_193145-6s7sqbl5/logs/debug-internal.log
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_init.py:init():841] calling init triggers
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'model_name': 'Qwen/Qwen3-1.7B-Base', 'hub_username': 'HuggingFaceAlbert', 'sample_ratio': 0.01, 'per_device_batch_size': 2, 'num_generations': 4, 'sft_epochs': 1, 'skip_sft': True, 'sft_checkpoint': None, 'output_dir': './outputs', 'push_to_hub': True, 'use_vllm': False, 'local_rank': -1, '_wandb': {}}
+2025-12-10 19:31:45,457 INFO    MainThread:903748 [wandb_init.py:init():889] starting backend
+2025-12-10 19:31:45,478 WARNING MainThread:903748 [wandb_init.py:init():1586] [no run ID] interrupted
+Traceback (most recent call last):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1577, in init
+    run = wi.init(run_settings, run_config, run_printer)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 891, in init
+    service = self._wl.ensure_service()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/wandb/sdk/wandb_setup.py", line 402, in ensure_service
+    self._connection = service_connection.connect_to_service(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/wandb/sdk/lib/service/service_connection.py", line 43, in connect_to_service
+    return _start_and_connect_service(asyncer, settings)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/wandb/sdk/lib/service/service_connection.py", line 56, in _start_and_connect_service
+    proc = service_process.start(settings)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/wandb/sdk/lib/service/service_process.py", line 30, in start
+    get_sentry().configure_scope(tags=dict(settings), process_context="service")
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 49, in wrapper
+    if not self._booted and not self._boot():
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 97, in _boot
+    import sentry_sdk  # type: ignore
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/sentry_sdk/__init__.py", line 3, in <module>
+    from sentry_sdk.scope import Scope
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/sentry_sdk/scope.py", line 1853, in <module>
+    from sentry_sdk.client import NonRecordingClient
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/sentry_sdk/client.py", line 34, in <module>
+    from sentry_sdk.transport import BaseHttpTransport, make_transport
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/sentry_sdk/transport.py", line 706, in <module>
+    import httpcore
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/httpcore/__init__.py", line 51, in <module>
+    from ._backends.anyio import AnyIOBackend
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 21, in <module>
+    class AnyIOStream(AsyncNetworkStream):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/httpcore/_backends/anyio.py", line 21, in AnyIOStream
+    class AnyIOStream(AsyncNetworkStream):
+KeyboardInterrupt

@@ -1,0 +1,94 @@
+[34m[1mwandb[0m: Detected [huggingface_hub.inference, openai] in use.
+[34m[1mwandb[0m: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+[34m[1mwandb[0m: For more information, check out the docs at: https://weave-docs.wandb.ai/
+INFO:__main__:Loading and processing datasets...
+INFO:data_processing:Loading MBPP dataset...
+INFO:data_processing:Original MBPP columns: ['task_id', 'text', 'code', 'test_list', 'test_setup_code', 'challenge_test_list']
+INFO:data_processing:Original MBPP size: 974
+INFO:data_processing:Processed MBPP columns: ['prompt', 'completion']
+INFO:data_processing:Processed MBPP size: 9
+INFO:data_processing:Loading APPS dataset...
+INFO:data_processing:Original APPS columns: ['problem_id', 'question', 'solutions', 'input_output', 'difficulty', 'url', 'starter_code']
+INFO:data_processing:Original APPS size: 5000
+INFO:data_processing:Processed APPS columns: ['prompt', 'completion']
+INFO:data_processing:Processed APPS size: 50
+INFO:__main__:MBPP dataset size: 9
+INFO:__main__:APPS dataset size: 50
+INFO:__main__:==================================================
+INFO:__main__:Starting SFT Warmup Training
+INFO:__main__:==================================================
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:25<00:00,  5.05s/it]
+{'train_runtime': 25.2532, 'train_samples_per_second': 0.356, 'train_steps_per_second': 0.198, 'train_loss': 0.7285871505737305, 'entropy': 1.0010419368743897, 'num_tokens': 693.0, 'mean_token_accuracy': 0.7839648485183716, 'epoch': 1.0}
+INFO:__main__:SFT model saved to ./outputs/sft_checkpoint
+INFO:__main__:==================================================
+INFO:__main__:Starting GRPO Training
+INFO:__main__:==================================================
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 79.42it/s]
+The tokenizer you are loading from './outputs/sft_checkpoint' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Traceback (most recent call last):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 402, in hf_raise_for_status
+    response.raise_for_status()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/repos/create
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 352, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 332, in main
+    run_grpo_training(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 210, in run_grpo_training
+    trainer = GRPOTrainer(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 446, in __init__
+    super().__init__(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 691, in __init__
+    self.init_hf_repo()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4964, in init_hf_repo
+    repo_url = create_repo(repo_name, token=token, private=self.args.hub_private_repo, exist_ok=True)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 3760, in create_repo
+    hf_raise_for_status(r)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 475, in hf_raise_for_status
+    raise _format(HfHubHTTPError, str(e), response) from e
+huggingface_hub.errors.HfHubHTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/repos/create (Request ID: Root=1-693a0f60-536fc29865ae625700cd6eb1;97341f15-ea27-47e5-bda1-c1b6c4b9ffc1)
+
+Invalid username or password.
+Traceback (most recent call last):
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 402, in hf_raise_for_status
+    response.raise_for_status()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/repos/create
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 352, in <module>
+    main()
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 332, in main
+    run_grpo_training(
+  File "/hdd3/albertwu/mini_rlvr/train_grpo_single.py", line 210, in run_grpo_training
+    trainer = GRPOTrainer(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/grpo_trainer.py", line 446, in __init__
+    super().__init__(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 691, in __init__
+    self.init_hf_repo()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4964, in init_hf_repo
+    repo_url = create_repo(repo_name, token=token, private=self.args.hub_private_repo, exist_ok=True)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 3760, in create_repo
+    hf_raise_for_status(r)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 475, in hf_raise_for_status
+    raise _format(HfHubHTTPError, str(e), response) from e
+huggingface_hub.errors.HfHubHTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/repos/create (Request ID: Root=1-693a0f60-536fc29865ae625700cd6eb1;97341f15-ea27-47e5-bda1-c1b6c4b9ffc1)
+
+Invalid username or password.

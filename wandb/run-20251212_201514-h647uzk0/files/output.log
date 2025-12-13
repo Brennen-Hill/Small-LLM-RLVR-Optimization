@@ -1,0 +1,34 @@
+ 15%|████████████████▊                                                                                                | 21/141 [00:56<05:11,  2.59s/it]Traceback (most recent call last):
+{'loss': 0.8328, 'grad_norm': 5.5604119300842285, 'learning_rate': 1.872340425531915e-05, 'entropy': 1.1687205195426942, 'num_tokens': 52319.0, 'mean_token_accuracy': 0.7914493262767792, 'epoch': 0.21}
+{'loss': 0.8205, 'grad_norm': 6.6338582038879395, 'learning_rate': 1.7304964539007094e-05, 'entropy': 1.264787232875824, 'num_tokens': 102432.0, 'mean_token_accuracy': 0.7892940461635589, 'epoch': 0.43}
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 23, in <module>
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2325, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1190, in training_step
+    return super().training_step(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4020, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1110, in compute_loss
+    per_token_entropy = entropy_from_logits(outputs.logits)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/utils.py", line 1571, in entropy_from_logits
+    chunk_entropy = -(torch.exp(logps) * logps).sum(-1)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 23, in <module>
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2325, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1190, in training_step
+    return super().training_step(*args, **kwargs)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 4020, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 1110, in compute_loss
+    per_token_entropy = entropy_from_logits(outputs.logits)
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/trl/trainer/utils.py", line 1571, in entropy_from_logits
+    chunk_entropy = -(torch.exp(logps) * logps).sum(-1)
+KeyboardInterrupt

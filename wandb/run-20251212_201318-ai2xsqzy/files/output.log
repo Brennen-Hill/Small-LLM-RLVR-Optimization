@@ -1,0 +1,19 @@
+ 25%|████████████████████████████                                                                                     | 35/141 [01:34<04:58,  2.82s/it]Traceback (most recent call last):
+{'loss': 0.9175, 'grad_norm': 5.138113498687744, 'learning_rate': 1.872340425531915e-05, 'entropy': 1.0146189272403716, 'num_tokens': 52319.0, 'mean_token_accuracy': 0.7770879983901977, 'epoch': 0.21}
+{'loss': 0.8476, 'grad_norm': 6.318935394287109, 'learning_rate': 1.7304964539007094e-05, 'entropy': 1.1074590981006622, 'num_tokens': 102436.0, 'mean_token_accuracy': 0.7830847084522248, 'epoch': 0.43}
+{'loss': 0.8053, 'grad_norm': 5.149728775024414, 'learning_rate': 1.5886524822695038e-05, 'entropy': 1.1321131765842438, 'num_tokens': 154766.0, 'mean_token_accuracy': 0.7848023772239685, 'epoch': 0.64}
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 23, in <module>
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2325, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2679, in _inner_training_loop
+    and (torch.isnan(tr_loss_step) or torch.isinf(tr_loss_step))
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/hdd3/albertwu/mini_rlvr/eval.py", line 23, in <module>
+    trainer.train()
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2325, in train
+    return inner_training_loop(
+  File "/hdd3/albertwu/miniconda3/envs/rlvr/lib/python3.10/site-packages/transformers/trainer.py", line 2679, in _inner_training_loop
+    and (torch.isnan(tr_loss_step) or torch.isinf(tr_loss_step))
+KeyboardInterrupt
