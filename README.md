@@ -45,6 +45,10 @@ python Sensitivity_Experiment.py
 
 ## Stabalization Experiments
 
+### Navigate
+Navigate to the `stabalization_experiments` folder. You should see the following files.
+
+### Run
 To run the GRPO naive baseline for coding task
 ```bash
 python train_grpo_single.py --sample_ratio=1 --per_device_batch_size=28 --num_generations=4
@@ -54,3 +58,4 @@ To run our optimized baseline
 ```bash
 python train_grpo_single_optimized.py --sample_ratio=1 --per_device_batch_size=28 --num_generations=4
 ```
+
