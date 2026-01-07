@@ -1,3 +1,7 @@
+## The Report
+
+A report on our findings so far and the corresponding analysis can be found in report.pdf.
+
 ## Instructions
 
 Here are the step-by-step instructions to set up your environment and run these three experiments.
